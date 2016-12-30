@@ -34,12 +34,19 @@ namespace AlienFileTest
                 RequestPath = "/page"
             });
 
-            app.UseFileUpload();
+
+            app.Map("/Upload", UploadMap);
+
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+        }
+
+        private static void UploadMap(IApplicationBuilder app)
+        {
+            app.UseFileUpload();
         }
     }
 }

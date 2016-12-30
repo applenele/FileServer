@@ -24,20 +24,27 @@ namespace AlienFile.Server
         {
             if (context.Request.Method == HttpMethods.Post)
             {
-                var files = context.Request.Form.Files;
-                foreach (var file in files)
+                try
                 {
-                    string fileName = DateHelper.GetTimeStamp() + Path.GetExtension(file.FileName);
-                    string path = Path.Combine(_hostingEnv.WebRootPath, "Upload", fileName);
-
-                    using (FileStream fs = System.IO.File.Create(path))
+                    var files = context.Request.Form.Files;
+                    foreach (var file in files)
                     {
-                        file.CopyTo(fs);
-                        fs.Flush();
+                        string fileName = DateHelper.GetTimeStamp() + Path.GetExtension(file.FileName);
+                        string path = Path.Combine(_hostingEnv.WebRootPath, "File", fileName);
+
+                        using (FileStream fs = System.IO.File.Create(path))
+                        {
+                            file.CopyTo(fs);
+                            fs.Flush();
+                        }
                     }
+                    context.Response.StatusCode = 200;
+                }
+                catch (Exception e)
+                {
+                    context.Response.StatusCode = 503;
                 }
             }
-            //await _next.Invoke(context);
         }
     }
 }

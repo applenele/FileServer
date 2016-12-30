@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/AlienFile.Server/src/AlienFileTest/wwwroot/File
+/AlienFile.Server/src/AlienFileTest/wwwroot/Upload
