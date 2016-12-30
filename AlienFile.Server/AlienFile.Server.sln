@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5004BCE1-75D4-408A-A403-A143D6714A5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32C02CE7-C372-43F0-8FE1-DE351876A840}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		..\..\..\WebPages.Sample\NuGet.config = ..\..\..\WebPages.Sample\NuGet.config
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AlienFile.Server", "src\AlienFile.Server\AlienFile.Server.xproj", "{20811C7D-F00C-47CF-9F68-1E291A49929C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AlienFileTest", "src\AlienFileTest\AlienFileTest.xproj", "{DE5698B0-C917-413B-A353-647085B869C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20811C7D-F00C-47CF-9F68-1E291A49929C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20811C7D-F00C-47CF-9F68-1E291A49929C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20811C7D-F00C-47CF-9F68-1E291A49929C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20811C7D-F00C-47CF-9F68-1E291A49929C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE5698B0-C917-413B-A353-647085B869C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE5698B0-C917-413B-A353-647085B869C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE5698B0-C917-413B-A353-647085B869C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE5698B0-C917-413B-A353-647085B869C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20811C7D-F00C-47CF-9F68-1E291A49929C} = {5004BCE1-75D4-408A-A403-A143D6714A5F}
+		{DE5698B0-C917-413B-A353-647085B869C2} = {5004BCE1-75D4-408A-A403-A143D6714A5F}
+	EndGlobalSection
+EndGlobal
