@@ -39,10 +39,12 @@ namespace AlienFile.Server
                         }
                     }
                     context.Response.StatusCode = 200;
+                    await context.Response.WriteAsync("上传成功");
                 }
                 catch (Exception e)
                 {
                     context.Response.StatusCode = 503;
+                    await context.Response.WriteAsync("上传失败");
                 }
             }
         }
