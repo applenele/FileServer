@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace AlienFileTest
+namespace AlentFileClientTest
 {
     public class Program
     {
@@ -15,7 +15,6 @@ namespace AlienFileTest
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseUrls("http://localhost:5001")
                 .UseStartup<Startup>()
                 .Build();
 
