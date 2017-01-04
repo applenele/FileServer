@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using AlienFile.Server.Helper;
+using AlienFile.Server.Models;
 
 namespace AlienFile.Server
 {
@@ -27,24 +28,38 @@ namespace AlienFile.Server
                 try
                 {
                     var files = context.Request.Form.Files;
+                    List<string> filePathList = new List<string>();
+                    List<string> realPathList = new List<string>();
                     foreach (var file in files)
                     {
                         string fileName = DateHelper.GetTimeStamp() + Path.GetExtension(file.FileName);
-                        string path = Path.Combine(_hostingEnv.WebRootPath, "File", fileName);
+                        string filePath = Path.Combine("File", fileName);
+                        string realPath = Path.Combine(filePath, fileName);
 
-                        using (FileStream fs = System.IO.File.Create(path))
+                        filePathList.Add(filePath);
+                        realPathList.Add(realPath);
+
+                        using (FileStream fs = System.IO.File.Create(realPath))
                         {
                             file.CopyTo(fs);
                             fs.Flush();
                         }
                     }
                     context.Response.StatusCode = 200;
-                    await context.Response.WriteAsync("上传成功");
+                    ReturnMessage message = new ReturnMessage();
+                    message.IsSuccess = true;
+                    message.Message = "上传成功";
+                    message.Path = string.Join(",",filePathList);
+                    message.Path = string.Join(",", realPathList);
+                    await context.Response.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(message));
                 }
                 catch (Exception e)
                 {
+                    ReturnMessage message = new ReturnMessage();
+                    message.IsSuccess = false;
+                    message.Message = "上传失败";
                     context.Response.StatusCode = 503;
-                    await context.Response.WriteAsync("上传失败");
+                    await context.Response.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(message));
                 }
             }
         }
