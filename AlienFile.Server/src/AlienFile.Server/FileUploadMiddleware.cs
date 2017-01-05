@@ -34,7 +34,7 @@ namespace AlienFile.Server
                     {
                         string fileName = DateHelper.GetTimeStamp() + Path.GetExtension(file.FileName);
                         string filePath = Path.Combine("File", fileName);
-                        string realPath = Path.Combine(filePath, fileName);
+                        string realPath = Path.Combine(_hostingEnv.WebRootPath, filePath);
 
                         filePathList.Add(filePath);
                         realPathList.Add(realPath);
