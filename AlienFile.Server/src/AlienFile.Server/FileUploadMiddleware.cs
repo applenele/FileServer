@@ -27,13 +27,28 @@ namespace AlienFile.Server
             {
                 try
                 {
+                    var path = context.Request.Query["filepath"];
+                    if (string.IsNullOrEmpty(path))
+                    {
+                        path = context.Request.Form["filepath"];
+                    }
+                    if (string.IsNullOrEmpty(path))
+                    {
+                        path = "File";
+                    }
+
                     var files = context.Request.Form.Files;
                     List<string> filePathList = new List<string>();
                     List<string> realPathList = new List<string>();
                     foreach (var file in files)
                     {
                         string fileName = DateHelper.GetTimeStamp() + Path.GetExtension(file.FileName);
-                        string filePath = Path.Combine("File", fileName);
+                        string filePath = Path.Combine(path, fileName);
+                        string fileDir = Path.Combine(_hostingEnv.WebRootPath,path);
+                        if (!Directory.Exists(fileDir))
+                        {
+                            Directory.CreateDirectory(fileDir);
+                        }
                         string realPath = Path.Combine(_hostingEnv.WebRootPath, filePath);
 
                         filePathList.Add(filePath);

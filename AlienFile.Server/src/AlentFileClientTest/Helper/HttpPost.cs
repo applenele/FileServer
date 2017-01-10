@@ -12,7 +12,7 @@ namespace AlentFileClientTest.Helper
 {
     public class HttpPost
     {
-        public static async Task<string> UploadFilesToRemoteUrl(string url, Stream postStream, string fileName)
+        public static async Task<string> UploadFilesToRemoteUrl(string url, Stream postStream, string fileName, string filePath = "File")
         {
             string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
 
@@ -29,9 +29,20 @@ namespace AlentFileClientTest.Helper
             var endBoundaryBytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" +
                                                                         boundary + "--");
 
+            string formdataTemplate = "\r\n--" + boundary +
+                                     "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
+
             string headerTemplate =
                 "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
                 "Content-Type: application/octet-stream\r\n\r\n";
+
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                string formitem = string.Format(formdataTemplate, "filePath", filePath);
+                byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                memStream.Write(formitembytes, 0, formitembytes.Length);
+            }
 
 
             memStream.Write(boundarybytes, 0, boundarybytes.Length);
@@ -68,7 +79,7 @@ namespace AlentFileClientTest.Helper
         }
 
 
-        public static async Task<string> UploadFilesToRemoteUrl(string url, Stream[] streams, string[] fileNames)
+        public static async Task<string> UploadFilesToRemoteUrl(string url, Stream[] streams, string[] fileNames,string filePath = "File")
         {
             string boundary = "----------------------------" + DateTime.Now.Ticks.ToString("x");
 
@@ -84,9 +95,21 @@ namespace AlentFileClientTest.Helper
             var endBoundaryBytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" +
                                                                         boundary + "--");
 
+            string formdataTemplate = "\r\n--" + boundary +
+                                     "\r\nContent-Disposition: form-data; name=\"{0}\";\r\n\r\n{1}";
+
             string headerTemplate =
                 "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
                 "Content-Type: application/octet-stream\r\n\r\n";
+
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                string formitem = string.Format(formdataTemplate, "filePath", filePath);
+                byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                memStream.Write(formitembytes, 0, formitembytes.Length);
+            }
+
 
             for (int i = 0; i < streams.Length; i++)
             {

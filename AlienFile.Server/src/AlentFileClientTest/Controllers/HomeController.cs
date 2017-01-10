@@ -38,9 +38,9 @@ namespace AlentFileClientTest.Controllers
             file.CopyTo(stream);
             int num = RandomHelper.GetRandom(FileServers.Count);
             FileServerModel fileServer = FileServers[num - 1];
-            string url = string.Format("{0}://{1}:{2}/{3}", "http",fileServer.Host,fileServer.Port,"Upload");
+            string url = string.Format("{0}://{1}:{2}/{3}", "http", fileServer.Host, fileServer.Port, "Upload");
             //string result = await HttpPost.UploadFilesToRemoteUrl("http://localhost:5001/Upload/", stream, file.FileName);
-            string result = await HttpPost.UploadFilesToRemoteUrl(url, stream, file.FileName);
+            string result = await HttpPost.UploadFilesToRemoteUrl(url, stream, file.FileName, "FileUpload");
             return Content(result);
         }
     }
